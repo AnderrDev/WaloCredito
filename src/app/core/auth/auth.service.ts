@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://api.walocredito.com/auth';
+  private apiUrl = 'https://api.walocredito.com/auth';  // URL del backend
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  login(credentials: { email: string; password: string }): Observable<any> {
+  login(credentials: { phone: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  register(userData: { name: string; email: string; password: string }): Observable<any> {
+  register(userData: { name: string; phone: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
@@ -26,3 +26,4 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 }
+ 

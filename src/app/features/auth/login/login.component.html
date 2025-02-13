@@ -1,0 +1,21 @@
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="phone" placeholder="Teléfono">
+        <div *ngIf="loginForm.controls['phone'].invalid && loginForm.controls['phone'].touched">
+            <small>El teléfono debe tener 10 dígitos</small>
+        </div>
+
+        <input type="password" formControlName="password" placeholder="Contraseña">
+        <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+            <small>La contraseña debe tener al menos 6 caracteres</small>
+        </div>
+
+        <button type="submit" [disabled]="loading || loginForm.invalid">Ingresar</button>
+
+        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+        <p>No tienes una cuenta? <button type="button" class="register-btn" (click)="goToRegister()">Regístrate</button>
+        </p>
+    </form>
+</div>
