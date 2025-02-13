@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EnrollmentService } from '../../../core/auth/enrollment.service';
 
 @Component({
@@ -8,17 +8,28 @@ import { EnrollmentService } from '../../../core/auth/enrollment.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './enrollment.component.html',
-  styleUrls: ['./enrollment.component.scss'],
 })
 export class EnrollmentComponent {
-  currentStep = 1; // Indica en qué paso estamos
+  currentStep = 1;
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(public enrollmentService: EnrollmentService) { }
 
   nextStep(): void {
-    if (this.currentStep < 4) {
-      this.currentStep++;
-    }
+    this.loading = true;
+    this.errorMessage = null;
+
+    this.enrollmentService.validateStep(this.currentStep).subscribe({
+      next: () => {
+        this.currentStep++;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Error en la validación';
+        this.loading = false;
+      }
+    });
   }
 
   prevStep(): void {
@@ -28,8 +39,20 @@ export class EnrollmentComponent {
   }
 
   submit(): void {
-    if (this.enrollmentService.enrollmentForm.valid) {
-      console.log('Formulario enviado', this.enrollmentService.enrollmentForm.value);
-    }
+    this.loading = true;
+    this.enrollmentService.finalizeEnrollment().subscribe({
+      next: () => {
+        alert('Registro completado con éxito');
+        this.loading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Error al finalizar el registro';
+        this.loading = false;
+      }
+    });
   }
+  get currentForm(): FormGroup {
+    return this.enrollmentService.enrollmentForm.get('step' + this.currentStep) as FormGroup;
+  }
+
 }

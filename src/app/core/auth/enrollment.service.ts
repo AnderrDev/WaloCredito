@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnrollmentService {
+  private apiUrl = 'https://api.walocredito.com/enrollment';
   enrollmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.enrollmentForm = this.fb.group({
       step1: this.createStep1Form(),
       step2: this.createStep2Form(),
@@ -27,8 +30,8 @@ export class EnrollmentService {
 
   private createStep2Form(): FormGroup {
     return this.fb.group({
-      firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-      surName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      surName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       expeditionDate: [new Date(new Date().setFullYear(new Date().getFullYear() - 5)).toISOString().split('T')[0], Validators.required],
       sex: ['', Validators.required],
       gender: ['', Validators.required],
@@ -50,5 +53,13 @@ export class EnrollmentService {
     return this.fb.group({
       otp: ['', Validators.required]
     });
+  }
+
+  validateStep(step: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/step${step}`, this.enrollmentForm.get(`step${step}`)?.value);
+  }
+
+  finalizeEnrollment(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/finalize`, this.enrollmentForm.value);
   }
 }
