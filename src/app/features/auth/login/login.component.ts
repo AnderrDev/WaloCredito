@@ -29,16 +29,27 @@ export class LoginComponent {
     this.loading = true;
     this.errorMessage = null;
 
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
+    // this.authService.login(this.loginForm.value).subscribe({
+    //   next: (res) => {
+    //     localStorage.setItem('token', res.token);
         this.router.navigate(['/dashboard']);
-      },
-      error: () => {
-        this.errorMessage = 'Número de teléfono o contraseña incorrectos';
-        this.loading = false;
-      }
-    });
+    //   },
+    //   error: () => {
+    //     this.errorMessage = 'Número de teléfono o contraseña incorrectos';
+    //     this.loading = false;
+    //   }
+    // });
+
+    // try {
+    //   this.authService.login(this.loginForm.value).then(() => {
+    //     this.router.navigate(['/dashboard']);
+    //   });
+    // }
+    // catch (error) {
+    //   this.errorMessage = 'Número de teléfono o contraseña incorrectos';
+    //   this.loading = false
+
+    // }
   }
 
   goToRegister(): void {

@@ -1,29 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { SupabaseService } from '../services/supabase.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://api.walocredito.com/auth';  // URL del backend
+  constructor(private supabase: SupabaseService) { }
 
-  constructor(private http: HttpClient) { }
+  // ✅ Sign in with phone and password
+  async login(credentials: { phone: string; password: string }) {
+    const { data, error } = await this.supabase.client.auth.signInWithPassword({
+      email: credentials.phone, 
+      password: credentials.password,
+    });
 
-  login(credentials: { phone: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    if (error) throw error;
+    return data.user.id;
   }
 
-  register(userData: { name: string; phone: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+  // ✅ Register a new user
+  async register(userData: { name: string; phone: string; password: string }) {
+    const { data, error } = await this.supabase.client.auth.signUp({
+      email: userData.phone + '@example.com',  // Workaround for Supabase requiring email
+      password: userData.password,
+      options: {
+        data: { name: userData.name, phone: userData.phone },
+      },
+    });
+
+    if (error) throw error;
+    return data;
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
+  // ✅ Logout the user
+  async logout() {
+    await this.supabase.client.auth.signOut();
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+  // ✅ Check if user is authenticated
+  async isAuthenticated(): Promise<boolean> {
+    const { data } = await this.supabase.client.auth.getSession();
+    return !!data.session;
+  }
+
+  // ✅ Get current user
+  async getUser() {
+    const { data, error } = await this.supabase.client.auth.getUser();
+    if (error) throw error;
+    return data.user;
   }
 }
- 
