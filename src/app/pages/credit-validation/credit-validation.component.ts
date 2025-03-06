@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-credit-validation',
@@ -14,7 +14,7 @@ export class CreditValidationComponent {
   step = 1;  // Track current step
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
       bankSelection: [''],
       salaryRange: [''],
@@ -34,7 +34,7 @@ export class CreditValidationComponent {
   submitForm() {
     if (this.form.valid) {
       console.log('Form submitted:', this.form.value);
-      alert('Solicitud enviada con éxito');
+      this.router.navigate(['/credit-form']);
     }
   }
 }

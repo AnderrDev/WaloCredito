@@ -5,6 +5,8 @@ import { EnrollmentComponent } from './features/auth/enrollment/enrollment.compo
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { CreditValidationComponent } from './pages/credit-validation/credit-validation.component';
 import { CreditFormComponent } from './pages/credit-form/credit-form.component';
+import { CreditConditionsComponent } from './pages/credit-conditions/credit-conditions.component';
+import { ContractSignatureComponent } from './pages/contract-signature/contract-signature.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -13,5 +15,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'credit-validation', component: CreditValidationComponent },
     { path: 'credit-form', component: CreditFormComponent },
+    { path: 'credit-conditions', component: CreditConditionsComponent },
+    { path: 'contract-signature', component: ContractSignatureComponent },
     { path: '**', redirectTo: 'auth/login' },
 ];

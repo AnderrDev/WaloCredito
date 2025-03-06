@@ -1,6 +1,7 @@
 <div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
   <!-- Background image -->
-  <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('assets/background.png');"></div>
+  <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('assets/background.png');">
+  </div>
 
   <!-- Card Container -->
   <div class="relative bg-white p-6 rounded-2xl shadow-xl w-96 text-center">
@@ -9,10 +10,10 @@
       <h2 class="text-xl font-bold text-gray-900">Solicita tu Crédito de libre inversión</h2>
       <p class="text-gray-600 text-sm mt-2">
         ¡Haz realidad tus planes hoy! Solicita tu Crédito de Libre Inversión de forma rápida y sin complicaciones.
-        Usa el dinero como quieras: viaja, renueva tu hogar o impulsa tu negocio. 
+        Usa el dinero como quieras: viaja, renueva tu hogar o impulsa tu negocio.
         <strong class="font-semibold">Pide el tuyo ahora y obtén una respuesta en minutos.</strong>
       </p>
-      <button
+      <button (click)="goToCredit()"
         class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center">
         Solicitar ahora →
       </button>
