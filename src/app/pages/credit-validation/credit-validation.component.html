@@ -1,0 +1,80 @@
+<div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('assets/background.png');"></div>
+  
+    <div class="relative bg-transparent p-6 text-center w-[500px]">
+      <!-- Progress Bar -->
+      <div class="flex justify-center items-center mb-6">
+        <div *ngFor="let stepNumber of [1,2,3,4]" class="flex items-center">
+          <div [class.bg-blue-500]="step >= stepNumber" class="w-8 h-8 flex items-center justify-center text-white rounded-full border border-white">
+            {{ stepNumber }}
+          </div>
+          <div *ngIf="stepNumber < 4" class="w-12 h-1 bg-white"></div>
+        </div>
+      </div>
+  
+      <!-- Step Titles -->
+      <h2 class="text-white text-2xl font-bold">Validación crediticia</h2>
+      <p class="text-white text-sm mb-6">Datos clave sobre tu historial en el sistema financiero</p>
+  
+      <!-- Form Steps -->
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        
+        <!-- Step 1: Bank Selection -->
+        <div *ngIf="step === 1" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+          <p class="mb-4 font-semibold">¿En qué banco solicitaste una tarjeta de crédito durante los últimos seis meses?</p>
+          <label *ngFor="let bank of ['Bancolombia', 'Banco de Bogotá', 'Davivienda', 'Banco BBVA Colombia']" class="flex items-center space-x-2 mb-2">
+            <input type="radio" formControlName="bankSelection" [value]="bank" class="form-radio text-blue-500">
+            <span>{{ bank }}</span>
+          </label>
+        </div>
+  
+        <!-- Step 2: Salary Range -->
+        <div *ngIf="step === 2" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+          <p class="mb-4 font-semibold">¿Cuál es tu rango de salario mensual?</p>
+          <label *ngFor="let salary of ['Menos de $1,000,000', '$1,000,000 - $3,000,000', '$3,000,000 - $5,000,000', 'Más de $5,000,000']" class="flex items-center space-x-2 mb-2">
+            <input type="radio" formControlName="salaryRange" [value]="salary" class="form-radio text-blue-500">
+            <span>{{ salary }}</span>
+          </label>
+        </div>
+  
+        <!-- Step 3: Loan Purpose -->
+        <div *ngIf="step === 3" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+          <p class="mb-4 font-semibold">¿Para qué necesitas este crédito?</p>
+          <label *ngFor="let purpose of ['Viaje', 'Renovación del hogar', 'Negocio', 'Otro']" class="flex items-center space-x-2 mb-2">
+            <input type="radio" formControlName="loanPurpose" [value]="purpose" class="form-radio text-blue-500">
+            <span>{{ purpose }}</span>
+          </label>
+        </div>
+  
+        <!-- Step 4: Other Loans -->
+        <div *ngIf="step === 4" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+          <p class="mb-4 font-semibold">¿Tienes otro crédito activo actualmente?</p>
+          <label *ngFor="let loan of ['Sí', 'No']" class="flex items-center space-x-2 mb-2">
+            <input type="radio" formControlName="otherLoans" [value]="loan" class="form-radio text-blue-500">
+            <span>{{ loan }}</span>
+          </label>
+        </div>
+  
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between mt-6">
+          <button type="button" (click)="prevStep()" [disabled]="step === 1"
+            class="px-4 py-2 bg-gray-600 text-white rounded-lg disabled:opacity-50">
+            Anterior
+          </button>
+          
+          <button *ngIf="step < 4" type="button" (click)="nextStep()"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg">
+            Siguiente
+          </button>
+  
+          <button *ngIf="step === 4" type="submit"
+            class="px-4 py-2 bg-green-500 text-white rounded-lg">
+            Enviar
+          </button>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  

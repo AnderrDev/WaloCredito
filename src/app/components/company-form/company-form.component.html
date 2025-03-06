@@ -1,0 +1,50 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="bg-black bg-opacity-30 p-6 rounded-lg shadow-xl text-white mt-6">
+
+    <!-- NIT y Razón Social -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm pb-2">NIT</label>
+        <input type="text" formControlName="nit" class="w-full p-2 rounded-md text-black bg-white" placeholder="Ingresar">
+      </div>
+      <div>
+        <label class="block text-sm pb-2">Razón Social</label>
+        <input type="text" formControlName="razonSocial" class="w-full p-2 rounded-md text-black bg-white" placeholder="Ingresar">
+      </div>
+    </div>
+  
+    <!-- Nombre de Contacto -->
+    <label class="block text-sm pb-2 mt-4">Nombre de Contacto</label>
+    <input type="text" formControlName="contactName" class="w-full p-2 rounded-md text-black bg-white" placeholder="Ingresar">
+  
+    <!-- Correo Electrónico y Teléfono -->
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <label class="block text-sm pb-2">Correo Electrónico</label>
+        <input type="email" formControlName="email" class="w-full p-2 rounded-md text-black bg-white" placeholder="Ingresar">
+      </div>
+      <div>
+        <label class="block text-sm pb-2">Teléfono</label>
+        <input type="text" formControlName="phone" class="w-full p-2 rounded-md text-black bg-white" placeholder="Ingresar">
+      </div>
+    </div>
+  
+    <!-- Checkbox: Aceptar Términos y Condiciones -->
+    <div class="mt-4 flex items-center">
+      <input type="checkbox" formControlName="acceptedTerms" class="mr-2">
+      <label class="text-sm">
+        Autorizo <a href="#" class="text-blue-400">tratamientos de datos</a> según política anexa de WALO
+      </label>
+    </div>
+  
+    <div class="mt-4 flex items-center">
+      <input type="checkbox" formControlName="acceptedNewTerms" class="mr-2">
+      <label class="text-sm">
+        Acepto los nuevos términos y condiciones <a href="#" class="text-blue-400">Ver detalles</a>
+      </label>
+    </div>
+  
+    <!-- Botón de Enviar -->
+    <button type="submit" class="mt-4 bg-blue-500 px-4 py-2 rounded text-white w-full">Enviar</button>
+  
+  </form>
+  

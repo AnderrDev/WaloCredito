@@ -1,0 +1,22 @@
+<div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0 bg-cover bg-center opacity-30" [style.backgroundImage]="'url(assets/background.png)'"></div>
+
+  <div class="relative bg-transparent p-6 text-center w-[800px]">
+    <h2 class="text-white text-3xl font-bold">Formulario de Crédito Flexible</h2>
+    <p class="text-white text-md mb-6">Completa el formulario y accede a un préstamo de libre inversión diseñado para ti.</p>
+
+    <!-- Selector de Tipo de Persona -->
+    <label class="block text-white text-sm pb-2">Tipo de Persona</label>
+    <select [(ngModel)]="personType" (change)="switchType($event)" class="w-full p-2 mt-1 rounded-md text-black bg-white">
+      <option value="NATURAL">Persona Natural</option>
+      <option value="JURIDICA">Persona Jurídica</option>
+    </select>
+
+    <!-- Contenedor de formularios SIN ANIMACIÓN -->
+    <div class="mt-6 relative min-h-[300px]">
+      <app-person-form *ngIf="personType === 'NATURAL'"></app-person-form>
+      <app-company-form *ngIf="personType === 'JURIDICA'"></app-company-form>
+    </div>
+  </div>
+</div>
