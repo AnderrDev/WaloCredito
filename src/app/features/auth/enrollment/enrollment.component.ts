@@ -14,19 +14,20 @@ export class EnrollmentComponent {
   loading = false;
   errorMessage: string | null = null;
 
-  constructor(public enrollmentService: EnrollmentService) { }
+  constructor(public enrollmentService: EnrollmentService) {}
 
   nextStep(): void {
     this.loading = true;
     this.errorMessage = null;
 
+    // Validación del paso actual usando el servicio
     this.enrollmentService.validateStep(this.currentStep).subscribe({
       next: () => {
         this.currentStep++;
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'Error en la validación';
+        this.errorMessage = err.error?.message || 'Error en la validación';
         this.loading = false;
       }
     });
@@ -46,13 +47,13 @@ export class EnrollmentComponent {
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'Error al finalizar el registro';
+        this.errorMessage = err.error?.message || 'Error al finalizar el registro';
         this.loading = false;
       }
     });
   }
+
   get currentForm(): FormGroup {
     return this.enrollmentService.enrollmentForm.get('step' + this.currentStep) as FormGroup;
   }
-
 }
