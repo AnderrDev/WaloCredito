@@ -15,5 +15,44 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
   }
   
+  .background {
+    background-image: url("/images/background.svg");
+    background-size: 1800px; /* Mantiene proporciones sin deformarse */
+    background-position: calc(100% - -290px) -700px; /* Mantiene tu posición */
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Ajuste para pantallas medianas */
+@media (max-width: 1420px) { 
+  .background {
+      background-size: 100vw auto; /* Hace que la imagen se vea bien sin deformarse */
+      background-position: calc(100% - -300px) -40vw; /* Mantiene tu posición */
+      height: 100vh; /* Mantiene el alto sin afectar contenido */
+  }
+}
+
+/* Ajuste para pantallas pequeñas (móviles) */
+@media (max-width: 900px) { 
+    .background {
+        background-size: 110vw auto; /* Aumenta la imagen en móviles */
+        background-position: calc(100% - -300px) -40vw; /* Mantiene tu posición */
+        height: 100vh; /* Evita que tape demasiado */
+    }
+}
+
+@media (max-width: 640px) { 
+  .background {
+      background-size: 180vw auto; /* Aumenta la imagen en móviles */
+      background-position: calc(100% - -220px) -70vw; /* Mantiene tu posición */
+      height: 100vh; /* Evita que tape demasiado */
+  }
+}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, } from '@angular/forms';
 import { EnrollmentService } from '../../../core/auth/enrollment.service';
 
 @Component({
@@ -8,15 +8,25 @@ import { EnrollmentService } from '../../../core/auth/enrollment.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './enrollment.component.html',
+  styleUrls: ['./enrollment.component.scss'],
 })
 export class EnrollmentComponent {
   currentStep = 1;
   loading = false;
   errorMessage: string | null = null;
+  isChecked: boolean = false;
 
   constructor(public enrollmentService: EnrollmentService) {}
 
+  toggleCheckbox() {
+    this.isChecked = !this.isChecked;
+    console.log('Valor actualizado:', this.isChecked);
+  }
+
   nextStep(): void {
+
+    this.currentStep = this.currentStep + 1; //TODO: Solo para dar estilos a la ventana siguiente
+
     this.loading = true;
     this.errorMessage = null;
 

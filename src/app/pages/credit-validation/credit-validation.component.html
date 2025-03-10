@@ -1,15 +1,27 @@
-<div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
+<div class="flex flex-col items-center justify-center min-h-screen relative font-display
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 px-4">
     <!-- Background Image -->
-    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('assets/background.png');"></div>
+    <div class="background bg-blue-bg"></div>
   
-    <div class="relative bg-transparent p-6 text-center w-[500px]">
+    <div class="relative bg-transparent p-0 md:p-6 text-center w-full max-w-[95%] sm:w-[500px]">
       <!-- Progress Bar -->
-      <div class="flex justify-center items-center mb-6">
-        <div *ngFor="let stepNumber of [1,2,3,4]" class="flex items-center">
-          <div [class.bg-blue-500]="step >= stepNumber" class="w-8 h-8 flex items-center justify-center text-white rounded-full border border-white">
+      <div class="flex justify-center items-center mb-6 space-x-2 sm:space-x-4 w-full">
+        <div *ngFor="let stepNumber of [1,2,3,4]; " class="flex items-center w-full last:w-auto">
+          <div  
+            [ngClass]="{
+              'bg-button text-white': step >= stepNumber, 
+              'bg-white text-gray-400 font-medium': step < stepNumber
+            }" 
+            class="w-8 h-8 flex items-center justify-center rounded-full z-10">
             {{ stepNumber }}
           </div>
-          <div *ngIf="stepNumber < 4" class="w-12 h-1 bg-white"></div>
+          <div *ngIf="stepNumber < 4" 
+            [ngClass]="{
+              'bg-button': step > stepNumber, 
+              'bg-gray-300': step <= stepNumber
+            }" 
+            class="flex-1 h-[2px] mx-2">
+          </div>
         </div>
       </div>
   
@@ -21,7 +33,8 @@
       <form [formGroup]="form" (ngSubmit)="submitForm()">
         
         <!-- Step 1: Bank Selection -->
-        <div *ngIf="step === 1" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+        <div *ngIf="step === 1" class="bg-blue-bg bg-opacity-30 p-6 rounded-lg text-white 
+        shadow-[0px_3px_60px_-10px_rgba(84,164,255,0.8)] border-[0.5px] border-white/60">
           <p class="mb-4 font-semibold">¿En qué banco solicitaste una tarjeta de crédito durante los últimos seis meses?</p>
           <label *ngFor="let bank of ['Bancolombia', 'Banco de Bogotá', 'Davivienda', 'Banco BBVA Colombia']" class="flex items-center space-x-2 mb-2">
             <input type="radio" formControlName="bankSelection" [value]="bank" class="form-radio text-blue-500">
@@ -30,7 +43,8 @@
         </div>
   
         <!-- Step 2: Salary Range -->
-        <div *ngIf="step === 2" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+        <div *ngIf="step === 2" class="bg-blue-bg bg-opacity-30 p-6 rounded-lg text-white 
+        shadow-[0px_3px_60px_-10px_rgba(84,164,255,0.8)] border-[0.5px] border-white/60">
           <p class="mb-4 font-semibold">¿Cuál es tu rango de salario mensual?</p>
           <label *ngFor="let salary of ['Menos de $1,000,000', '$1,000,000 - $3,000,000', '$3,000,000 - $5,000,000', 'Más de $5,000,000']" class="flex items-center space-x-2 mb-2">
             <input type="radio" formControlName="salaryRange" [value]="salary" class="form-radio text-blue-500">
@@ -39,7 +53,8 @@
         </div>
   
         <!-- Step 3: Loan Purpose -->
-        <div *ngIf="step === 3" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+        <div *ngIf="step === 3" class="bg-blue-bg bg-opacity-30 p-6 rounded-lg text-white 
+        shadow-[0px_3px_60px_-10px_rgba(84,164,255,0.8)] border-[0.5px] border-white/60">
           <p class="mb-4 font-semibold">¿Para qué necesitas este crédito?</p>
           <label *ngFor="let purpose of ['Viaje', 'Renovación del hogar', 'Negocio', 'Otro']" class="flex items-center space-x-2 mb-2">
             <input type="radio" formControlName="loanPurpose" [value]="purpose" class="form-radio text-blue-500">
@@ -48,28 +63,31 @@
         </div>
   
         <!-- Step 4: Other Loans -->
-        <div *ngIf="step === 4" class="bg-blue-800 bg-opacity-30 p-6 rounded-lg shadow-xl text-white">
+        <div *ngIf="step === 4" class="bg-blue-bg bg-opacity-30 p-6 rounded-lg text-white 
+        shadow-[0px_3px_60px_-10px_rgba(84,164,255,0.8)] border-[0.5px] border-white/60">
           <p class="mb-4 font-semibold">¿Tienes otro crédito activo actualmente?</p>
           <label *ngFor="let loan of ['Sí', 'No']" class="flex items-center space-x-2 mb-2">
             <input type="radio" formControlName="otherLoans" [value]="loan" class="form-radio text-blue-500">
             <span>{{ loan }}</span>
           </label>
         </div>
+
+        <hr class="border-t border-button mt-6 mb-3">
   
         <!-- Navigation Buttons -->
-        <div class="flex justify-between mt-6">
-          <button type="button" (click)="prevStep()" [disabled]="step === 1"
-            class="px-4 py-2 bg-gray-600 text-white rounded-lg disabled:opacity-50">
+        <div class="flex flex-row space-x-4 w-full max-w-md mx-auto text-sm md:text-lg">
+          <button type="button" (click)="prevStep()" [class.invisible]="step === 1"
+            class="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg font-medium cursor-pointer text-center">
             Anterior
           </button>
-          
+        
           <button *ngIf="step < 4" type="button" (click)="nextStep()"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg">
-            Siguiente
+            class="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg font-medium cursor-pointer text-center">
+            Siguiente <img src="/icons/arrow-button.svg" class="w-auto h-auto inline-block"/>
           </button>
-  
+        
           <button *ngIf="step === 4" type="submit"
-            class="px-4 py-2 bg-green-500 text-white rounded-lg">
+            class="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg font-medium cursor-pointer text-center">
             Enviar
           </button>
         </div>

@@ -1,29 +1,41 @@
-<div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
+<div class="flex flex-col items-center justify-center min-h-screen relative font-display
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90">
   <!-- Background image -->
-  <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('assets/background.png');">
+  <div class="background bg-blue-bg">
   </div>
 
+  <!-- User Profile Section -->
+  <div class="w-full grid grid-cols-3 items-center p-4 md:pl-8 md:pr-8 m-6">
+    <!-- Imagen de perfil (solo visible en móviles) -->
+    <img src="assets/profile.jpg" class="w-10 h-10 ml-2 rounded-full border-2 border-white block md:hidden" alt="User Avatar">
+
+    <!-- Logo (centrado en móviles) -->
+    <img src="/icons/logo.svg" alt="Walo" class="w-30 h-auto mx-auto md:mx-0">
+
+    <!-- Contenedor del perfil (visible solo en escritorio) -->
+    <div class="flex items-center gap-4 justify-end col-start-3">
+        <img src="assets/profile.jpg" class="hidden md:flex w-10 h-10 rounded-full border-2 border-white" alt="User Avatar">
+        <span class="hidden md:flex text-white font-semibold">Andres Oviedo</span>
+        <button (click)="logout()" class="text-white hover:text-gray-300">Cerrar Sesión</button>
+    </div>
+</div>
+
   <!-- Card Container -->
-  <div class="relative bg-white p-6 rounded-2xl shadow-xl w-96 text-center">
-    <div class="flex flex-col items-center">
-      <img src="assets/icons/credit-icon.svg" class="w-16 h-16 mb-4" alt="Credit Icon" />
+
+  <div class="w-[80vw] h-auto max-w-lg max-h-[430px] md:min-h-[410px] bg-white p-6 m-6 rounded-2xl shadow-xl flex items-center justify-center mx-auto mt-auto md:my-auto">
+    <div class="flex flex-col justify-between items-center text-center h-full">
+      <img src="/icons/money.svg" class="w-[40%] md:w-auto mb-4" alt="Credit Icon" />
       <h2 class="text-xl font-bold text-gray-900">Solicita tu Crédito de libre inversión</h2>
-      <p class="text-gray-600 text-sm mt-2">
+      <p class=" text-blue-bg text-sm font-medium mt-2">
         ¡Haz realidad tus planes hoy! Solicita tu Crédito de Libre Inversión de forma rápida y sin complicaciones.
         Usa el dinero como quieras: viaja, renueva tu hogar o impulsa tu negocio.
-        <strong class="font-semibold">Pide el tuyo ahora y obtén una respuesta en minutos.</strong>
+        <strong class="font-bold text-blue-bg">Pide el tuyo ahora y obtén una respuesta en minutos.</strong>
       </p>
       <button (click)="goToCredit()"
-        class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center">
-        Solicitar ahora →
+        class="w-full h-auto mt-4 bg-button hover:bg-blue-700 text-white font-bold p-3 rounded-lg flex items-center justify-center cursor-pointer">
+        Solicitar ahora <img src="/icons/arrow-button.svg" class="w-auto h-auto"/>
       </button>
     </div>
   </div>
 
-  <!-- User Profile Section -->
-  <div class="absolute top-4 right-4 flex items-center space-x-2">
-    <img src="assets/profile.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User Avatar" />
-    <span class="text-white font-semibold">Andres Oviedo</span>
-    <button (click)="logout()" class="text-white hover:text-gray-300">Cerrar Sesión</button>
-  </div>
 </div>

@@ -1,6 +1,28 @@
-<div class="flex items-center justify-center min-h-screen bg-blue-900">
-  <div class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-    <h2 class="text-xl font-semibold mb-4 text-center">Paso {{ currentStep }} de 4</h2>
+<div class="flex flex-col items-center justify-center min-h-screen relative font-display
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 px-4 text-white">
+  <div class="background bg-blue-bg"></div>
+  <div class="max-w-lg mx-auto p-6 bg-transparent rounded-lg mt-10">
+
+    <!-- Progress Bar -->
+    <div class="flex justify-center items-center mb-6 space-x-2 sm:space-x-4 w-full">
+      <div *ngFor="let stepNumber of [1,2,3,4]; " class="flex items-center w-full last:w-auto">
+        <div  
+          [ngClass]="{
+            'bg-button text-white': currentStep >= stepNumber, 
+            'bg-white text-gray-400 font-medium': currentStep < stepNumber
+          }" 
+          class="w-8 h-8 flex items-center justify-center rounded-full z-10">
+          {{ stepNumber }}
+        </div>
+        <div *ngIf="stepNumber < 4" 
+          [ngClass]="{
+            'bg-button': currentStep > stepNumber, 
+            'bg-gray-300': currentStep <= stepNumber
+          }" 
+          class="flex-1 h-[2px] mx-2">
+        </div>
+      </div>
+    </div>
 
     <!-- Mensaje de error -->
     <p *ngIf="errorMessage" class="text-red-500 text-sm text-center">{{ errorMessage }}</p>
@@ -10,58 +32,89 @@
 
     <!-- Formulario dinámico -->
     <form [formGroup]="currentForm" class="space-y-4">
+
+      <h2 class="text-3xl font-bold text-center">Validemos tu identificación</h2>
+      <h3 class="text-lg font-medium text-center">Ingresa tus datos</h3>
       
       <!-- Paso 1: Información de Documento -->
       <ng-container *ngIf="currentStep === 1">
-        <h3 class="text-lg font-medium mb-3">Información de Documento</h3>
-        <select formControlName="documentType" class="w-full border p-2 rounded bg-gray-100">
+        <p class="mb-1 text-sm">Tipo de documento</p>
+        <select formControlName="documentType" class="w-full border p-2 rounded bg-gray-100 text-text-ip font-medium ">
           <option value="" disabled selected>Seleccione un tipo de documento</option>
           <option value="DNI">DNI</option>
           <option value="Pasaporte">Pasaporte</option>
         </select>
-        <input type="text" formControlName="documentNumber" placeholder="Número de documento" class="w-full border p-2 rounded bg-gray-100">
-        <label class="flex items-center">
-          <input type="checkbox" formControlName="termsAccepted" class="mr-2"> Acepto los términos
+        <p class="mb-1 text-sm">Número de documento</p>
+        <input type="text" formControlName="documentNumber" placeholder="Número de documento" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <label class="flex items-center space-x-2">
+          <input type="checkbox" class="hidden peer cursor-pointer">
+          <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
+            <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
+          </div>
+          <h3 class="text-sm font-medium">Acepto <span class="font-bold cursor-pointer underline">términos y condiciones</span></h3>
         </label>
-        <label class="flex items-center">
-          <input type="checkbox" formControlName="consultAccepted" class="mr-2"> Acepto la consulta
+
+        
+        <label class="flex items-center space-x-2 w-full">
+          <input type="checkbox" class="hidden peer cursor-pointer">
+          <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
+            <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
+          </div>
+          <h3 class="text-sm font-medium">Acepto <span class="font-bold cursor-pointer underline">autorización para consulta y tratamiento de datos personales</span></h3>
         </label>
       </ng-container>
 
       <!-- Paso 2: Datos Personales -->
       <ng-container *ngIf="currentStep === 2">
-        <h3 class="text-lg font-medium mb-3">Datos Personales</h3>
-        <input type="text" formControlName="firstName" placeholder="Nombre" class="w-full border p-2 rounded bg-gray-100">
-        <input type="text" formControlName="surName" placeholder="Apellido" class="w-full border p-2 rounded bg-gray-100">
-        <input type="date" formControlName="expeditionDate" class="w-full border p-2 rounded bg-gray-100">
-        <select formControlName="sex" class="w-full border p-2 rounded bg-gray-100">
+        <p class="mb-1 text-sm">Primer nombre</p>
+        <input type="text" formControlName="firstName" placeholder="Nombre" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <p class="mb-1 text-sm">Primer Apellido</p>
+        <input type="text" formControlName="surName" placeholder="Apellido" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <p class="mb-1 text-sm">Fecha de expedición documento</p>
+        <input type="date" formControlName="expeditionDate" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <p class="mb-1 text-sm">Sexo</p>
+        <select formControlName="sex" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
           <option value="" disabled selected>Seleccione su sexo</option>
           <option value="M">Masculino</option>
           <option value="F">Femenino</option>
         </select>
-        <input type="email" formControlName="email" placeholder="Correo electrónico" class="w-full border p-2 rounded bg-gray-100">
+        <p class="mb-1 text-sm">Género</p>
+        <input type="email" formControlName="email" placeholder="Correo electrónico" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
       </ng-container>
 
       <!-- Paso 3: Seguridad -->
       <ng-container *ngIf="currentStep === 3">
-        <h3 class="text-lg font-medium mb-3">Seguridad</h3>
-        <input type="text" formControlName="phoneNumber" placeholder="Teléfono" class="w-full border p-2 rounded bg-gray-100">
-        <input type="password" formControlName="pin" placeholder="PIN (4 dígitos)" class="w-full border p-2 rounded bg-gray-100">
-        <input type="password" formControlName="confirmPin" placeholder="Confirmar PIN" class="w-full border p-2 rounded bg-gray-100">
+        <p class="mb-1 text-sm">Teléfono</p>
+        <input type="text" formControlName="phoneNumber" placeholder="Teléfono" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <p class="mb-1 text-sm">Pin</p>
+        <input type="password" formControlName="pin" placeholder="PIN (4 dígitos)" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <p class="mb-1 text-sm">Confirmar Pin</p>
+        <input type="password" formControlName="confirmPin" placeholder="Confirmar PIN" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
       </ng-container>
 
       <!-- Paso 4: Confirmación OTP -->
       <ng-container *ngIf="currentStep === 4">
-        <h3 class="text-lg font-medium mb-3">Confirmación OTP</h3>
-        <input type="text" formControlName="otp" placeholder="Código OTP" class="w-full border p-2 rounded bg-gray-100">
+        <p class="mb-1 text-sm">Confirmación OTP</p>
+        <input type="text" formControlName="otp" placeholder="Código OTP" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
       </ng-container>
     </form>
 
     <!-- Botones de navegación -->
-    <div class="flex justify-between mt-6">
-      <button *ngIf="currentStep > 1" (click)="prevStep()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Anterior</button>
-      <button *ngIf="currentStep < 4" (click)="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Siguiente</button>
-      <button *ngIf="currentStep === 4" (click)="submit()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Finalizar Registro</button>
-    </div>
+    <div class="flex flex-row space-x-4 pt-4 w-full max-w-md mx-auto text-sm md:text-lg">
+      <button type="button" (click)="prevStep()" [class.invisible]="currentStep === 1"
+        class="flex-1 px-4 py-3 bg-gray-500 text-white rounded-lg font-medium cursor-pointer text-center">
+        Anterior
+      </button>
+    
+      <button *ngIf="currentStep < 4" type="button" (click)="nextStep()"
+        class="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg font-medium cursor-pointer text-center">
+        Siguiente <img src="/icons/arrow-button.svg" class="w-auto h-auto inline-block"/>
+      </button>
+    
+      <button *ngIf="currentStep === 4" type="submit"
+        class="flex-1 px-4 py-3 bg-green-500 text-white rounded-lg font-medium cursor-pointer text-center">
+        Finalizar Registro
+      </button>
+    </div>    
   </div>
 </div>
