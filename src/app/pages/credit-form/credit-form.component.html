@@ -1,14 +1,16 @@
-<div class="flex items-center justify-center min-h-screen bg-blue-900 relative">
+<div class="flex flex-col items-center justify-center min-h-screen relative font-display
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 px-4 text-white">
+  <div class="background bg-blue-bg"></div>
   <!-- Imagen de fondo -->
   <div class="absolute inset-0 bg-cover bg-center opacity-30" [style.backgroundImage]="'url(assets/background.png)'"></div>
 
-  <div class="relative bg-transparent p-6 text-center w-[800px]">
-    <h2 class="text-white text-3xl font-bold">Formulario de Crédito Flexible</h2>
+  <div class="relative bg-transparent p-6 text-center w-50vw">
+    <h2 class="text-white text-3xl font-bold pb-2">Formulario de Crédito Flexible</h2>
     <p class="text-white text-md mb-6">Completa el formulario y accede a un préstamo de libre inversión diseñado para ti.</p>
 
     <!-- Selector de Tipo de Persona -->
-    <label class="block text-white text-sm pb-2">Tipo de Persona</label>
-    <select [(ngModel)]="personType" (change)="switchType($event)" class="w-full p-2 mt-1 rounded-md text-black bg-white">
+    <label class="block text-white text-sm pb-2 text-left">Tipo de Persona</label>
+    <select [(ngModel)]="personType" (change)="switchType($event)" class="w-full border p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
       <option value="NATURAL">Persona Natural</option>
       <option value="JURIDICA">Persona Jurídica</option>
     </select>
