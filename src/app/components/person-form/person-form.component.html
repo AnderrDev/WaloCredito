@@ -3,12 +3,12 @@
   <div class="flex flex-col md:flex-row gap-4">
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Nombre</label>
-      <input type="text" formControlName="nombre" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="nombre" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
 
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Apellido</label>
-      <input type="text" formControlName="apellido" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="apellido" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
   </div>
 
@@ -24,19 +24,19 @@
 
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Número de Documento</label>
-      <input type="text" formControlName="numeroDocumento" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="numeroDocumento" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
   </div>
 
   <div class="flex flex-col md:flex-row gap-4 mt-4">
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Correo Electrónico</label>
-      <input type="email" formControlName="correoElectronico" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="email" formControlName="correoElectronico" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" >
     </div>
 
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Teléfono</label>
-      <input type="text" formControlName="telefono" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="telefono" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
   </div>
 
@@ -48,7 +48,7 @@
   </select>
 
   <label class="block text-sm pb-2 mt-4">Monto Solicitado</label>
-  <input type="number" formControlName="montoSolicitado" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+  <input type="number" formControlName="montoSolicitado" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
 
   <label class="block text-sm pb-2 mt-4">Plazo(meses)</label>
   <select formControlName="plazoPago" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
@@ -59,7 +59,7 @@
   </select>
 
   <label class="block text-sm pb-2 mt-4">Mensaje (Opcional)</label>
-  <textarea formControlName="mensaje" placeholder="Quiero saber más información sobre el proceso de crédito." class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" rows="4"></textarea>
+  <textarea formControlName="mensaje" placeholder="Quiero saber más información sobre el proceso de crédito." class="resize-none  w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" rows="4"></textarea>
 
   <label class="flex items-center space-x-2 w-full mt-4">
     <input type="checkbox" class="hidden peer cursor-pointer">

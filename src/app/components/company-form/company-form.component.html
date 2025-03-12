@@ -1,47 +1,53 @@
 <form [formGroup]="form" (ngSubmit)="submitForm()" class="w-full bg-transparent bg-opacity-30 text-left rounded-lg shadow-xl text-white mt-6">
-    
+  
   <div class="flex flex-col md:flex-row gap-4">
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">NIT</label>
-      <input type="text" formControlName="nit" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="nit" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
+
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Razón Social</label>
-      <input type="text" formControlName="razonSocial" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="razonSocial" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" >
     </div>
   </div>
-
-  <label class="block text-sm pb-2 mt-4">Nombre de Contacto</label>
-  <input type="text" formControlName="contactName" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
 
   <div class="flex flex-col md:flex-row gap-4 mt-4">
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Correo Electrónico</label>
-      <input type="email" formControlName="email" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="email" formControlName="correoElectronico" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
+
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Teléfono</label>
-      <input type="text" formControlName="phone" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
+      <input type="text" formControlName="telefono" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
     </div>
   </div>
+
+  <label class="block text-sm pb-2 mt-4">Nombre de Contacto</label>
+  <input type="text" formControlName="contactName" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
+
+  <label class="block text-sm pb-2 mt-4">Mensaje (Opcional)</label>
+  <textarea formControlName="mensaje" placeholder="Quiero saber más información sobre el proceso de crédito." class="resize-none  w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" rows="4"></textarea>
+
+  <label class="flex items-center space-x-2 w-full mt-4">
+    <input type="checkbox" class="hidden peer cursor-pointer">
+    <div class
+    ="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
+      <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
+    </div>
+    <h3 class="text-sm font-medium">Autorizo <span class="font-bold text-button cursor-pointer underline">tratamientos de datos</span> según política anexa de WALO</h3>
+  </label>
 
   <label class="flex items-center space-x-2 w-full mt-4">
     <input type="checkbox" class="hidden peer cursor-pointer">
     <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
       <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
     </div>
-    <h3 class="text-sm font-medium">Autorizo <span class="font-bold text-button cursor-pointer underline">tratamientos de datos</span> según política anexa de WALO</h3>
-  </label>
-
-  <label class="flex items-center space-x-2 my-4">
-    <input type="checkbox" class="hidden peer cursor-pointer">
-    <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
-      <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
-    </div>
-    <h3 class="text-sm font-medium">Acepto los nuevos términos y condiciones  <span class="font-bold text-button cursor-pointer underline">Ver detalles</span></h3>
+    <h3 class="text-sm font-medium">Acepto los nuevos términos y condicione <span class="font-bold text-button cursor-pointer underline">Ver detalles</span></h3>
   </label>
 
   <hr class="border-t border-button mt-6 mb-3">
   
-  <button type="submit" class="mt-4 bg-blue-500 px-4 py-2 rounded text-white w-full">Enviar</button>
+  <button type="submit" class="mt-4 bg-blue-500 px-4 py-2 rounded text-white">Enviar</button>
 </form>
