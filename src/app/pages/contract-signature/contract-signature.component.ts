@@ -9,13 +9,14 @@ import SignaturePad from 'signature_pad';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './contract-signature.component.html',
-  styleUrls: []
+  styleUrls: ['./contract-signature.component.scss']
 })
 export class ContractSignatureComponent implements AfterViewInit {
   contractForm: FormGroup;
 
   @ViewChild('signatureCanvas') signatureCanvas!: ElementRef<HTMLCanvasElement>;
   private signaturePad!: SignaturePad;
+  private ctx!: CanvasRenderingContext2D;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.contractForm = this.fb.group({
@@ -32,9 +33,20 @@ export class ContractSignatureComponent implements AfterViewInit {
       maxWidth: 3,
       penColor: "black",
       backgroundColor: "white"
+
     });
 
+    this.ctx = this.signatureCanvas.nativeElement.getContext('2d')!;
     this.resizeCanvas();
+    this.drawPlaceholder();
+  }
+
+  drawPlaceholder() {
+    const canvas = this.signatureCanvas.nativeElement;
+    this.ctx.font = '16px Arial';
+    this.ctx.fillStyle = 'gray';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('Firma con el mouse en este campo', canvas.width / 2, canvas.height / 2);
   }
 
   resizeCanvas() {
@@ -48,6 +60,10 @@ export class ContractSignatureComponent implements AfterViewInit {
 
   clearSignature() {
     this.signaturePad.clear();
+
+    const canvas = this.signatureCanvas.nativeElement;
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.drawPlaceholder();
   }
 
   saveSignature() {
@@ -74,4 +90,5 @@ export class ContractSignatureComponent implements AfterViewInit {
     alert('Contrato firmado exitosamente.');
     this.router.navigate(['/dashboard']);
   }
+  
 }

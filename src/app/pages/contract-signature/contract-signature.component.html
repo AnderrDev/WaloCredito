@@ -1,64 +1,71 @@
-<div class="flex items-center justify-center min-h-screen bg-blue-900 relative px-4">
-  <!-- Imagen de fondo -->
-  <div class="absolute inset-0 bg-cover bg-center opacity-30" [style.backgroundImage]="'url(assets/background.png)'"></div>
+<div class="flex flex-col items-center justify-center min-h-screen relative font-display bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 px-4">
+    <!-- Background Image -->
+    <div class="background bg-blue-bg"></div>
 
-  <div class="relative bg-transparent p-6 text-center w-full max-w-2xl rounded-xl shadow-xl backdrop-blur-lg">
-    <!-- Título -->
-    <h2 class="text-white text-3xl font-bold mb-2">Firma de contrato</h2>
+    <div class="relative p-6 rounded-lg text-white border-none w-full max-w-4xl">
+        <!-- Título -->
+        <h2 class="text-white text-3xl font-bold mb-2">Firma de contrato</h2>
 
-    <!-- Formulario -->
-    <form [formGroup]="contractForm" class="space-y-4 text-left">
-      <!-- Número de cuenta -->
-      <label class="text-white text-sm">Número de cuenta</label>
-      <input 
-        type="text" 
-        formControlName="accountNumber" 
-        placeholder="Ingrese su número de cuenta"
-        class="w-full p-2 border rounded-lg bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+        <!-- Contenedor para organización en pantallas grandes -->
+        <div class="flex flex-col lg:flex-row lg:space-x-6 w-full items-start">
 
-      <!-- Tipo de cuenta -->
-      <label class="text-white text-sm">Tipo de cuenta</label>
-      <select 
-        formControlName="accountType" 
-        class="w-full p-2 border rounded-lg bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="ahorros">Cuenta de ahorros</option>
-        <option value="corriente">Cuenta corriente</option>
-      </select>
+            <!-- Formulario (Inputs a la derecha en pantallas grandes) -->
+            <form [formGroup]="contractForm" class="space-y-4 text-left w-full lg:w-1/2">
+                <!-- Número de cuenta -->
+                <label class="text-white text-sm">Número de cuenta</label>
+                <input 
+                    type="text" 
+                    formControlName="accountNumber" 
+                    placeholder="Ingrese su número de cuenta"
+                    class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium focus:outline-none focus:ring-0"
+                />
 
-      <!-- Entidad bancaria -->
-      <label class="text-white text-sm">Entidad bancaria</label>
-      <select 
-        formControlName="bank" 
-        class="w-full p-2 border rounded-lg bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="Bancolombia">Bancolombia</option>
-        <option value="Davivienda">Davivienda</option>
-        <option value="Banco de Bogotá">Banco de Bogotá</option>
-        <option value="BBVA">BBVA</option>
-      </select>
+                <!-- Tipo de cuenta -->
+                <label class="text-white text-sm">Tipo de cuenta</label>
+                <select 
+                    formControlName="accountType" 
+                    class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium focus:outline-none focus:ring-0"
+                >
+                    <option value="ahorros">Cuenta de ahorros</option>
+                    <option value="corriente">Cuenta corriente</option>
+                </select>
 
-      <!-- Firma digital -->
-      <div class="mt-6">
-        <label class="text-white text-sm">Firmar documento</label>
-        <div class="bg-white p-3 rounded-lg shadow-md">
-          <canvas #signatureCanvas class="w-full h-40 border rounded-md"></canvas>
+                <!-- Entidad bancaria -->
+                <label class="text-white text-sm">Entidad bancaria</label>
+                <select 
+                    formControlName="bank" 
+                    class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium focus:outline-none focus:ring-0"
+                >
+                    <option value="Bancolombia">Bancolombia</option>
+                    <option value="Davivienda">Davivienda</option>
+                    <option value="Banco de Bogotá">Banco de Bogotá</option>
+                    <option value="BBVA">BBVA</option>
+                </select>
+            </form>
+
+            <!-- Firma digital (A la izquierda en pantallas grandes) -->
+            <div class="w-full lg:w-1/2">
+                <label class="text-white text-sm">Firmar documento</label>
+                <div class="bg-white p-3 rounded-lg shadow-md">
+                    <canvas #signatureCanvas class="w-full h-40 border rounded-md"></canvas>
+                </div>
+                <button type="button" (click)="clearSignature()" class="cursor-pointer mt-2 text-sm text-blue-500 hover:underline">
+                    Borrar firma
+                </button>
+            </div>
         </div>
-        <button type="button" (click)="clearSignature()" class="mt-2 text-sm text-blue-400 hover:underline">
-          Borrar firma
-        </button>
-      </div>
-    </form>
 
-    <!-- Botones -->
-    <div class="flex justify-between mt-6">
-      <button (click)="reject()" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition">
-        Rechazar
-      </button>
-      <button (click)="accept()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 flex items-center transition">
-        Aceptar <span class="ml-2">➡️</span>
-      </button>
+        <!-- Botones -->
+        <div class="flex flex-row justify-end mt-6 gap-4 w-full">
+            <button (click)="reject()" 
+                class="w-1/2 sm:w-[150px] bg-gray-700 text-white px-6 py-2 cursor-pointer rounded-lg hover:bg-gray-800 transition">
+                Rechazar
+            </button>
+            <button (click)="accept()" 
+                class="w-1/2 sm:w-[150px] bg-button text-white px-6 py-2 rounded-lg font-medium cursor-pointer text-center flex items-center justify-center gap-2">
+                Aceptar<img src="/icons/arrow-button.svg" alt="" class="w-5 h-5">
+            </button>
+
+        </div>
     </div>
-  </div>
 </div>
