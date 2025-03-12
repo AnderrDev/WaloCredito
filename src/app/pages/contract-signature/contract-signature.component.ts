@@ -72,6 +72,6 @@ export class ContractSignatureComponent implements AfterViewInit {
 
     this.saveSignature();
     alert('Contrato firmado exitosamente.');
-    this.router.navigate(['/next-step']);
+    this.router.navigate(['/dashboard']);
   }
 }

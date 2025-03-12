@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-person-form',
@@ -11,7 +12,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 export class PersonFormComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -28,9 +29,11 @@ export class PersonFormComponent {
   }
 
   submitForm() {
-    if (this.form.valid) {
-      console.log('Solicitud enviada:', this.form.value);
-      alert('Formulario enviado con éxito');
-    }
+    // if (this.form.valid) {
+    //   console.log('Solicitud enviada:', this.form.value);
+    //   alert('Formulario enviado con éxito');
+    // }
+    this.router.navigate(['/credit-conditions']);
+
   }
 }

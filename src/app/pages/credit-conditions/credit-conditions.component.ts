@@ -30,7 +30,7 @@ export class CreditConditionsComponent {
   }
 
   accept() {
-    this.router.navigate(['/next-step']); // Cambia a la ruta correcta
+    this.router.navigate(['/contract-signature']); // Cambia a la ruta correcta
   }
 };
 
