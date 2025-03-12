@@ -15,7 +15,8 @@
   <div class="flex flex-col md:flex-row gap-4 mt-4">
     <div class="w-full md:w-1/2">
       <label class="block text-sm pb-2">Tipo de Documento</label>
-      <select formControlName="tipoDocumento" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
+      <select formControlName="tipoDocumento" placeholder="Tipo de Documento"  class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
+        <option value="" disabled selected>Seleccione un tipo de documento</option>
         <option value="dni">DNI</option>
         <option value="cedula">Cédula</option>
       </select>
@@ -41,6 +42,7 @@
 
   <label class="block text-sm pb-2 mt-4">Tipo de Crédito</label>
   <select formControlName="tipoCredito" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
+    <option value="" disabled selected>Seleccione un tipo de crédito</option>
     <option value="libreInversion">Libre Inversión (500.000 - 3.000.000)</option>
     <option value="waloYa">WaloYa (100.000 - 300.000)</option>
   </select>
@@ -48,8 +50,9 @@
   <label class="block text-sm pb-2 mt-4">Monto Solicitado</label>
   <input type="number" formControlName="montoSolicitado" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" placeholder="Ingresar">
 
-  <label class="block text-sm pb-2 mt-4">Plazo/Metodo de Pago</label>
+  <label class="block text-sm pb-2 mt-4">Plazo(meses)</label>
   <select formControlName="plazoPago" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
+    <option value="" disabled selected>Seleccione un plazo</option>
     <option value="unaCuota">3 meses</option>
     <option value="quincenal">6 meses</option>
     <option value="quincenal">12 meses</option>
