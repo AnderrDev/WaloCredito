@@ -32,6 +32,12 @@ export class CreditConditionsComponent {
   accept() {
     this.router.navigate(['/contract-signature']); // Cambia a la ruta correcta
   }
+
+  openPanel: number | null = null;
+
+  togglePanel(index: number) {
+    this.openPanel = this.openPanel === index ? null : index;
+  }
 };
 
 
