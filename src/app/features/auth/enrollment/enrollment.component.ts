@@ -14,9 +14,26 @@ export class EnrollmentComponent {
   currentStep = 1;
   loading = false;
   errorMessage: string | null = null;
-  isChecked: boolean = false;
+  isChecked = false;
 
   constructor(public enrollmentService: EnrollmentService) {}
+
+  dropdowns = {
+    document: { isOpen: false, selected: null, options: ['Cédula de ciudadanía', 'Pasaporte'] },
+    sex: { isOpen: false, selected: '', options: [
+      { value: 'M', label: 'Masculino' },
+      { value: 'F', label: 'Femenino' }
+    ]}
+  };
+
+  toggleDropdown(type: 'document' | 'sex') {
+    this.dropdowns[type].isOpen = !this.dropdowns[type].isOpen;
+  }
+
+  selectOption(type: 'document' | 'sex', option: any) {
+    this.dropdowns[type].selected = option.label || option;
+    this.dropdowns[type].isOpen = false;
+  }
 
   toggleCheckbox() {
     this.isChecked = !this.isChecked;

@@ -14,22 +14,28 @@
             type="text" 
             formControlName="phone" 
             placeholder="Teléfono"
-            class="w-full p-3 mb-1 border bg-white border-border-ip rounded-md focus:outline-none text-text-ip placeholder-gray-400 font-semibold"
+            class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                  bg-white placeholder-border-ip font-semibold text-text-ip font-medium 
+                  focus:border-border-ip focus:ring-0 focus:outline-none"
           />
-          <div *ngIf="loginForm.controls['phone'].invalid && loginForm.controls['phone'].touched" class="text-red-500 text-sm mt-1 text-left">
+          <div *ngIf="loginForm.controls['phone'].invalid && loginForm.controls['phone'].touched" 
+               class="text-red-500 text-sm mt-1 text-left">
             El teléfono debe tener 10 dígitos
           </div>
         </div>
-  
+        
         <!-- Contraseña -->
         <div>
           <input 
             type="password" 
             formControlName="password" 
             placeholder="Contraseña"
-            class="w-full p-3 mb-1  border bg-white border-border-ip rounded-lg focus:outline-none text-text-ip placeholder-gray-400 font-semibold"
+            class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                  bg-white placeholder-border-ip font-semibold text-text-ip font-medium 
+                  focus:border-border-ip focus:ring-0 focus:outline-none"
           />
-          <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="text-red-500 text-sm mt-1 text-left">
+          <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" 
+               class="text-red-500 text-sm mt-1 text-left">
             La contraseña debe tener al menos 6 caracteres
           </div>
         </div>

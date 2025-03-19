@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center justify-center min-h-screen relative font-display
-            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 px-4 text-white">
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 p-6 text-white">
   <div class="background bg-blue-bg"></div>
-  <div class="max-w-lg mx-auto p-6 bg-transparent rounded-lg mt-10">
+  <div class="w-full md:w-[440px] max-w-[904px] flex flex-col items-center justify-center mx-auto bg-transparent rounded-lg sm:mt-10">
 
     <!-- Progress Bar -->
     <div class="flex justify-center items-center mb-6 space-x-2 sm:space-x-4 w-full">
@@ -11,7 +11,7 @@
             'bg-button text-white': currentStep >= stepNumber, 
             'bg-white text-gray-400 font-medium': currentStep < stepNumber
           }" 
-          class="w-8 h-8 flex items-center justify-center rounded-full z-10">
+          class="w-[40px] h-[40px] md:w-[56px] md:h-[56px] flex items-center justify-center rounded-full z-10 font-semibold text-[16px] md:text-[22.4px]">
           {{ stepNumber }}
         </div>
         <div *ngIf="stepNumber < 4" 
@@ -19,7 +19,7 @@
             'bg-button': currentStep > stepNumber, 
             'bg-gray-300': currentStep <= stepNumber
           }" 
-          class="flex-1 h-[2px] mx-2">
+          class="flex-1 w-full h-[2px] rounded-[1px] ml-2">
         </div>
       </div>
     </div>
@@ -33,70 +33,145 @@
     <!-- Formulario dinámico -->
     <form [formGroup]="currentForm" class="space-y-4">
 
-      <h2 class="text-3xl font-bold text-center">Validemos tu identificación</h2>
-      <h3 class="text-lg font-medium text-center">Ingresa tus datos</h3>
+      <h2 class="text-[30px] font-bold text-center text-center">Validemos tu identificación</h2>
+      <h3 class="text-[20px] font-medium text-center">Ingresa tus datos</h3>
       
       <!-- Paso 1: Información de Documento -->
       <ng-container *ngIf="currentStep === 1">
-        <p class="mb-1 text-sm">Tipo de documento</p>
-        <select formControlName="documentType" class="w-full border p-2 rounded bg-gray-100 text-text-ip font-medium ">
-          <option value="" disabled selected>Seleccione un tipo de documento</option>
-          <option value="DNI">DNI</option>
-          <option value="Pasaporte">Pasaporte</option>
-        </select>
-        <p class="mb-1 text-sm">Número de documento</p>
-        <input type="text" formControlName="documentNumber" placeholder="Número de documento" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
-        <label class="flex items-center space-x-2">
-          <input type="checkbox" class="hidden peer cursor-pointer">
-          <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
-            <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
-          </div>
-          <h3 class="text-sm font-medium">Acepto <span class="font-bold cursor-pointer underline">términos y condiciones</span></h3>
-        </label>
-
+        <p class="h-[18px] mb-2">Tipo de documento</p>
+        <div class="relative w-full">
+          <button (click)="toggleDropdown('document')"
+            class="w-full h-[56px] border border-border-ip py-3 px-4 rounded-lg 
+                  bg-gray-100 font-semibold text-border-ip font-medium text-left 
+                  flex justify-between items-center focus:outline-none"
+            [ngClass]="{'text-text-ip': dropdowns.document.selected, 'rounded-b-none': dropdowns.document.isOpen}">
+            
+            {{ dropdowns.document.selected || 'Seleccione un tipo de documento' }}
         
-        <label class="flex items-center space-x-2 w-full">
-          <input type="checkbox" class="hidden peer cursor-pointer">
-          <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
-            <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
-          </div>
-          <h3 class="text-sm font-medium">Acepto <span class="font-bold cursor-pointer underline">autorización para consulta y tratamiento de datos personales</span></h3>
-        </label>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#191549" class="w-5 h-5">
+              <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+            </svg>                       
+          </button>
+          <ul *ngIf="dropdowns.document.isOpen"
+            class="absolute w-full bg-white border border-gray-300 rounded-b-lg shadow-lg overflow-hidden">
+            <li *ngFor="let option of dropdowns.document.options" 
+                (click)="selectOption('document', option)" 
+                class="h-[38px] pt-2 pr-6 pb-2 pl-6 text-[18px] font-semibold text-blue-bg hover:bg-button hover:text-white cursor-pointer">
+              {{ option }}
+            </li>
+          </ul>
+        </div>     
+        <p class="h-[18px] mb-2">Número de documento</p>
+        <input type="text" formControlName="documentNumber" placeholder="Número de documento"
+            class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                  focus:border-border-ip focus:ring-0 focus:outline-none">
+
+          <!-- Contenedor del checkbox con el check -->
+          <label class="flex items-center space-x-2 w-full relative w-6 h-6">
+            <input type="checkbox" class="hidden peer cursor-pointer">
+              <!-- Caja del checkbox -->
+              <div class="w-6 h-6 border border-button rounded-lg bg-white shrink-0"></div>
+              <!-- Imagen del check -->
+              <img src="/icons/Check.svg" alt="Check"
+                class="w-6 h-6 absolute rounded-lg top-0 left-0 opacity-0 peer-checked:opacity-100 transition-opacity duration-200">
+            <h3 class="text-sm font-medium">Acepto <span class="font-bold cursor-pointer underline">términos y condiciones</span></h3>
+          </label>
+
+          <label class="flex items-center space-x-2 w-full relative w-6 h-6">
+            <input type="checkbox" class="hidden peer cursor-pointer">
+              <div class="w-6 h-6 border border-button rounded-lg bg-white shrink-0"></div>
+              <img src="/icons/Check.svg" alt="Check"
+                class="w-6 h-6 absolute rounded-lg top-0 left-0 opacity-0 peer-checked:opacity-100 transition-opacity duration-200">
+            <h3 class="text-sm font-medium">
+              Acepto <span class="font-bold cursor-pointer underline">autorización para consulta y tratamiento de datos personales</span>
+            </h3>
+          </label>
       </ng-container>
 
       <!-- Paso 2: Datos Personales -->
       <ng-container *ngIf="currentStep === 2">
-        <p class="mb-1 text-sm">Primer nombre</p>
-        <input type="text" formControlName="firstName" placeholder="Nombre" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
-        <p class="mb-1 text-sm">Primer Apellido</p>
-        <input type="text" formControlName="surName" placeholder="Apellido" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
-        <p class="mb-1 text-sm">Fecha de expedición documento</p>
-        <input type="date" formControlName="expeditionDate" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
-        <p class="mb-1 text-sm">Sexo</p>
-        <select formControlName="sex" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
-          <option value="" disabled selected>Seleccione su sexo</option>
-          <option value="M">Masculino</option>
-          <option value="F">Femenino</option>
-        </select>
-        <p class="mb-1 text-sm">Género</p>
-        <input type="email" formControlName="email" placeholder="Correo electrónico" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[904px] w-full md:w-[700px] lg:-w-[904px]  mx-auto">
+          <div>
+            <p class="mb-1 text-sm">Primer nombre</p>
+            <input type="text" formControlName="firstName" placeholder="Nombre" 
+              class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                     focus:border-border-ip focus:ring-0 focus:outline-none">
+          </div>
+          <div>
+            <p class="mb-1 text-sm">Primer Apellido</p>
+            <input type="text" formControlName="surName" placeholder="Apellido" 
+              class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                     focus:border-border-ip focus:ring-0 focus:outline-none">
+          </div>
+          <div>
+            <p class="mb-1 text-sm">Fecha de expedición documento</p>
+            <input type="date" formControlName="expeditionDate" 
+              class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                     focus:border-border-ip focus:ring-0 focus:outline-none">
+          </div>
+          <div class="relative w-full">
+            <p class="mb-1 text-sm">Sexo</p>
+            <button (click)="toggleDropdown('sex')"
+              class="w-full h-[56px] border border-border-ip py-3 px-4 rounded-lg 
+                    bg-gray-100 font-semibold text-border-ip font-medium text-left 
+                    flex justify-between items-center focus:outline-none"
+              [ngClass]="{'text-text-ip': dropdowns.sex.selected, 'rounded-b-none': dropdowns.sex.isOpen}">
+              
+              {{ dropdowns.sex.selected || 'Seleccione su sexo' }}
+          
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#191549" class="w-5 h-5">
+                <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+              </svg>                       
+            </button>
+            <ul *ngIf="dropdowns.sex.isOpen"
+              class="absolute w-full bg-white border border-gray-300 rounded-b-lg shadow-lg overflow-hidden">
+              <li *ngFor="let option of dropdowns.sex.options" 
+                  (click)="selectOption('sex', option.label)" 
+                  class="h-[38px] pt-2 pr-6 pb-2 pl-6 text-[18px] font-semibold text-blue-bg hover:bg-button hover:text-white cursor-pointer">
+                {{ option.label }}
+              </li>
+            </ul>
+          </div>
+          <div class="md:col-span-2">
+            <p class="mb-1 text-sm">Correo electrónico</p>
+            <input type="email" formControlName="email" placeholder="Correo electrónico" 
+              class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                     focus:border-border-ip focus:ring-0 focus:outline-none">
+          </div>
+        </div>
       </ng-container>
 
       <!-- Paso 3: Seguridad -->
       <ng-container *ngIf="currentStep === 3">
         <p class="mb-1 text-sm">Teléfono</p>
-        <input type="text" formControlName="phoneNumber" placeholder="Teléfono" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <input type="text" formControlName="phoneNumber" placeholder="Teléfono" 
+          class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                focus:border-border-ip focus:ring-0 focus:outline-none">
+      
         <p class="mb-1 text-sm">Pin</p>
-        <input type="password" formControlName="pin" placeholder="PIN (4 dígitos)" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <input type="password" formControlName="pin" placeholder="PIN (4 dígitos)" 
+          class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                focus:border-border-ip focus:ring-0 focus:outline-none">
+      
         <p class="mb-1 text-sm">Confirmar Pin</p>
-        <input type="password" formControlName="confirmPin" placeholder="Confirmar PIN" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <input type="password" formControlName="confirmPin" placeholder="Confirmar PIN" 
+          class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                focus:border-border-ip focus:ring-0 focus:outline-none">
       </ng-container>
+      
 
       <!-- Paso 4: Confirmación OTP -->
       <ng-container *ngIf="currentStep === 4">
         <p class="mb-1 text-sm">Confirmación OTP</p>
-        <input type="text" formControlName="otp" placeholder="Código OTP" class="w-full border p-2 rounded bg-gray-100 placeholder-gray-400 text-text-ip font-medium">
+        <input type="text" formControlName="otp" placeholder="Código OTP" 
+          class="w-full h-[56px] border border-gray-300 py-3 px-4 rounded-lg 
+                bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium 
+                focus:border-border-ip focus:ring-0 focus:outline-none">
       </ng-container>
+      
     </form>
 
     <!-- Botones de navegación -->
@@ -107,12 +182,12 @@
       </button>
     
       <button *ngIf="currentStep < 4" type="button" (click)="nextStep()"
-        class="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg font-medium cursor-pointer text-center">
+        class="flex-1 px-4 py-3 bg-button text-white rounded-lg font-medium cursor-pointer text-center">
         Siguiente <img src="/icons/arrow-button.svg" class="w-auto h-auto inline-block"/>
       </button>
     
       <button *ngIf="currentStep === 4" type="submit"
-        class="flex-1 px-4 py-3 bg-green-500 text-white rounded-lg font-medium cursor-pointer text-center">
+        class="flex-1 px-4 py-3 bg-button text-white rounded-lg font-medium cursor-pointer text-center">
         Finalizar Registro
       </button>
     </div>    
