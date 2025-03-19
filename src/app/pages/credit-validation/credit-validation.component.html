@@ -12,7 +12,7 @@
               'bg-button text-white': step >= stepNumber, 
               'bg-white text-gray-400 font-medium': step < stepNumber
             }" 
-            class="w-8 h-8 flex items-center justify-center rounded-full z-10">
+            class="w-[40px] h-[40px] md:w-[56px] md:h-[56px] flex items-center justify-center rounded-full z-10 font-semibold text-[16px] md:text-[22.4px]">
             {{ stepNumber }}
           </div>
           <div *ngIf="stepNumber < 4" 
