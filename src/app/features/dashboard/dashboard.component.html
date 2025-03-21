@@ -1,17 +1,19 @@
-<div class="flex flex-col items-center justify-center min-h-screen relative font-display
-            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 p-[56px_24px_56px_24px] ">
+<div class="flex flex-col items-center justify-center lg:pt-10 lg:pr-20 lg:pl-20 sm:pt-14 sm:pr-6 sm:pb-14 sm:pl-6 min-h-screen relative font-display
+            bg-gradient-to-b from-blue-bg/40 to-blue-bg/90 text-white ">
   <!-- Background image -->
   <div class="background bg-blue-bg">
   </div>
 
   <!-- User Profile Section -->
-  <div class="w-full grid grid-cols-3 items-center md:p-[8px_24px]">
+  <div class="w-full grid grid-cols-3 items-center">
     <!-- Imagen de perfil (solo visible en móviles) -->
     <img src="assets/profile.jpg" class="w-10 h-10 ml-2 rounded-full border-2 border-white block md:hidden"
       alt="User Avatar">
 
     <!-- Logo (centrado en móviles) -->
-    <img src="/icons/logo.svg" alt="Walo" class="w-30 h-auto mx-auto md:mx-0">
+    <div class="hidden md:flex w-full h-[80px] items-center px-6">
+      <img src="/icons/logo.svg" alt="Logo" class="h-[40px] w-[141.1px]">
+    </div>
 
     <div class="flex items-center gap-4 justify-end col-start-3">
       <svg class="hidden md:flex w-10 h-10 text-white border-2 border-white rounded-full shrink-0" fill="currentColor"
@@ -27,22 +29,24 @@
 
   <!-- Card Container -->
 
-  <div class="w-full max-w-[560px] h-auto ming-h-[445px] md:min-h-[410px] bg-white 
-         md:p-[40px] p-[24px_16px_24px_16px] rounded-2xl shadow-xl 
+  <div class="w-full max-w-[560px] h-auto min-h-[390px] sm:min-h-[445px] md:min-h-[410px] bg-white 
+         sm:p-[24px_16px_24px_16px] p-4 rounded-2xl shadow-xl 
          flex items-center justify-center mx-auto mt-auto md:my-auto">
     <div class="flex flex-col justify-between items-center text-center h-full">
-      <img src="/icons/money.svg" class="w-[116px] h-[116px] md:w-auto mb-4" alt="Credit Icon" />
-      <h2 class="text-xl font-bold text-blue-bg">Solicita tu Crédito de libre inversión</h2>
-      <p class=" text-blue-bg text-sm text-base font-medium mt-2">
+      <img src="/icons/money.svg" class="w-[100px] h-[100px] sm:w-[116px] sm:h-[116px] mb-4" alt="Credit Icon" />
+      <h2 class="text-lg sm:text-2xl font-bold text-blue-bg">Solicita tu Crédito de libre inversión</h2>
+      <p class="text-blue-bg text-sm sm:text-base font-medium mt-2">
         ¡Haz realidad tus planes hoy! Solicita tu Crédito de Libre Inversión de forma rápida y sin complicaciones.
         Usa el dinero como quieras: viaja, renueva tu hogar o impulsa tu negocio.
-        <strong class="font-bold font-bold text-basetext-blue-bg">Pide el tuyo ahora y obtén una respuesta en minutos.</strong>
+        <strong class="font-bold text-basetext-blue-bg">Pide el tuyo ahora y obtén una respuesta en minutos.</strong>
       </p>
       <button (click)="goToCredit()"
-        class="w-full h-auto mt-4 bg-button text-white font-bold p-3 rounded-lg flex items-center justify-center cursor-pointer">
-        Solicitar ahora <img src="/icons/arrow-button.svg" class="w-auto h-auto" />
+          class="w-[260px] sm:w-[310px] md:w-[480px] max-w-full min-w-[200px] h-[50px] sm:h-[56px] mt-4 bg-button text-white font-bold px-4 py-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer">
+          Solicitar ahora
+          <img src="/icons/arrow-button.svg" class="w-4 sm:w-5 h-4 sm:h-5" />
       </button>
     </div>
-  </div>
+</div>
+
 
 </div>

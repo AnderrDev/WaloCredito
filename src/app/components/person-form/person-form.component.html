@@ -1,83 +1,100 @@
-<form [formGroup]="form" (ngSubmit)="submitForm()" class="w-full bg-transparent bg-opacity-30 text-left rounded-lg shadow-xl text-white mt-6">
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="w-full bg-transparent bg-opacity-30 text-left rounded-lg shadow-xl text-white mt-6 flex flex-col gap-[16px]">
   
   <div class="flex flex-col md:flex-row gap-4">
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Nombre</label>
-      <input type="text" formControlName="nombre" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
+      <input type="text" formControlName="nombre" placeholder="Ingresar nombre" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
     </div>
 
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Apellido</label>
-      <input type="text" formControlName="apellido" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
+      <input type="text" formControlName="apellido" placeholder="Ingresar apellido" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
     </div>
   </div>
 
   <div class="flex flex-col md:flex-row gap-4 mt-4">
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Tipo de Documento</label>
-      <select formControlName="tipoDocumento" placeholder="Tipo de Documento"  class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
-        <option value="" disabled selected>Seleccione un tipo de documento</option>
+      <select formControlName="tipoDocumento" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
+        <option value="" disabled selected>Seleccionar tipo de documento</option>
         <option value="dni">DNI</option>
         <option value="cedula">Cédula</option>
       </select>
     </div>
 
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Número de Documento</label>
-      <input type="text" formControlName="numeroDocumento" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
+      <input type="text" formControlName="numeroDocumento" placeholder="Ingresar número de documento" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
     </div>
   </div>
 
   <div class="flex flex-col md:flex-row gap-4 mt-4">
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Correo Electrónico</label>
-      <input type="email" formControlName="correoElectronico" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" >
+      <input type="email" formControlName="correoElectronico" placeholder="Ingresar correo electrónico" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
     </div>
 
-    <div class="w-full md:w-1/2">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
       <label class="block text-sm pb-2">Teléfono</label>
-      <input type="text" formControlName="telefono" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
+      <input type="text" formControlName="telefono" placeholder="Ingresar teléfono" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
     </div>
   </div>
 
-  <label class="block text-sm pb-2 mt-4">Tipo de Crédito</label>
-  <select formControlName="tipoCredito" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
-    <option value="" disabled selected>Seleccione un tipo de crédito</option>
-    <option value="libreInversion">Libre Inversión (500.000 - 3.000.000)</option>
-    <option value="waloYa">WaloYa (100.000 - 300.000)</option>
-  </select>
-
-  <label class="block text-sm pb-2 mt-4">Monto Solicitado</label>
-  <input type="number" formControlName="montoSolicitado" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium">
-
-  <label class="block text-sm pb-2 mt-4">Plazo(meses)</label>
-  <select formControlName="plazoPago" class="w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 text-text-ip font-medium">
-    <option value="" disabled selected>Seleccione un plazo</option>
-    <option value="unaCuota">3 meses</option>
-    <option value="quincenal">6 meses</option>
-    <option value="quincenal">12 meses</option>
-  </select>
-
-  <label class="block text-sm pb-2 mt-4">Mensaje (Opcional)</label>
-  <textarea formControlName="mensaje" placeholder="Quiero saber más información sobre el proceso de crédito." class="resize-none  w-full border border-border-ip p-2 rounded bg-gray-100 focus:outline-none focus:ring-0 placeholder-gray-400 text-text-ip font-medium" rows="4"></textarea>
-
-  <label class="flex items-center space-x-2 w-full mt-4">
-    <input type="checkbox" class="hidden peer cursor-pointer">
-    <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
-      <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
+  <div class="flex flex-col md:flex-row gap-4 mt-4">
+    <div class="w-full md:w-[440px] sm:w-[342px]">
+      <label class="block text-sm pb-2">Tipo de Crédito</label>
+      <select formControlName="tipoCredito" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
+        <option value="" disabled selected>Seleccionar tipo de crédito</option>
+        <option value="libreInversion">Libre Inversión (500.000 - 3.000.000)</option>
+        <option value="waloYa">WaloYa (100.000 - 300.000)</option>
+      </select>
     </div>
-    <h3 class="text-sm font-medium">Autorizo <span class="font-bold text-button cursor-pointer underline">tratamientos de datos</span> según política anexa de WALO</h3>
+
+    <div class="w-full md:w-[440px] sm:w-[342px]">
+      <label class="block text-sm pb-2">Monto Solicitado</label>
+      <input type="number" formControlName="montoSolicitado" placeholder="Ingresar monto solicitado" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
+    </div>
+  </div>
+
+  <div class="w-full md:w-[440px] sm:w-[342px] mt-4">
+    <label class="block text-sm pb-2">Plazo (meses)</label>
+    <select formControlName="plazoPago" class="w-full h-[56px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]">
+      <option value="" disabled selected>Seleccionar plazo</option>
+      <option value="unaCuota">3 meses</option>
+      <option value="quincenal">6 meses</option>
+      <option value="quincenal">12 meses</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block text-sm pb-2 mt-4">Mensaje (Opcional)</label>
+    <textarea formControlName="mensaje" placeholder="Quiero saber más información sobre el proceso de crédito." class="resize-none w-full h-[96px] border border-gray-300 rounded-lg bg-gray-100 placeholder-border-ip font-semibold text-text-ip font-medium focus:border-border-ip focus:ring-0 focus:outline-none p-[12px_16px]"></textarea>
+  </div>
+
+  <label class="flex items-center space-x-2 w-full relative w-6 h-6">
+    <input type="checkbox" class="hidden peer cursor-pointer">
+    <div class="w-6 h-6 border border-button rounded-lg bg-white shrink-0"></div>
+    <img src="/icons/Check.svg" alt="Check"
+      class="w-6 h-6 absolute rounded-lg top-0 left-0 opacity-0 peer-checked:opacity-100 transition-opacity duration-200">
+    <h3 class="text-sm font-medium">
+      Autorizo <span class="font-bold text-button cursor-pointer underline">tratamientos de datos</span> según política anexa de WALO
+    </h3>
   </label>
 
-  <label class="flex items-center space-x-2 w-full mt-4">
+  <label class="flex items-center space-x-2 w-full relative w-6 h-6">
     <input type="checkbox" class="hidden peer cursor-pointer">
-    <div class="w-6 h-6 border-none rounded-md flex items-center justify-center bg-button peer-checked:bg-transparent shrink-0">
-      <img src="/icons/Check.svg" alt="Check" class="w-[200%] h-[200%] peer-checked:block">
-    </div>
-    <h3 class="text-sm font-medium">Acepto los nuevos términos y condicione <span class="font-bold text-button cursor-pointer underline">Ver detalles</span></h3>
+    <div class="w-6 h-6 border border-button rounded-lg bg-white shrink-0"></div>
+    <img src="/icons/Check.svg" alt="Check"
+      class="w-6 h-6 absolute rounded-lg top-0 left-0 opacity-0 peer-checked:opacity-100 transition-opacity duration-200">
+    <h3 class="text-sm font-medium">
+      Acepto los nuevos términos y condiciones <span class="font-bold text-button cursor-pointer underline">Ver detalles</span>
+    </h3>
   </label>
 
   <hr class="border-t border-button mt-6 mb-3">
   
-  <button type="submit" class="w-full bg-button text-white p-3 cursor-pointer rounded-md hover:bg-blue-600 transition disabled:bg-gray-400 ">Enviar</button>
+  <div class="flex justify-end">
+    <button type="submit" 
+      class="cursor-pointer md:w-[139px] md:h-[56px] md:gap-[16px] md:px-[24px] md:py-[16px] md:rounded-[8px] w-full h-[56px] bg-button text-white rounded-lg font-montserrat font-medium text-[16px] leading-[100%] text-center">Enviar <img src="/icons/arrow-button.svg" class="w-auto h-auto inline-block"/></button>
+  </div>
 </form>
