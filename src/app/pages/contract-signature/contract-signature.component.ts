@@ -51,10 +51,18 @@ export class ContractSignatureComponent implements AfterViewInit {
 
   resizeCanvas() {
     const canvas = this.signatureCanvas.nativeElement;
+    const container = canvas.parentElement; // Obtener el contenedor del canvas
     const ratio = Math.max(window.devicePixelRatio || 1, 1);
     canvas.width = canvas.offsetWidth * ratio;
     canvas.height = canvas.offsetHeight * ratio;
     canvas.getContext("2d")!.scale(ratio, ratio);
+
+    if (container) {
+      canvas.width = container.clientWidth * ratio;
+      canvas.height = container.clientHeight * ratio; // Usar el alto del contenedor
+      canvas.getContext("2d")!.scale(ratio, ratio);
+    }
+
     this.signaturePad.clear();
   }
 
